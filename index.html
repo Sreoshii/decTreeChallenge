@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,55 +20,21 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -111,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-⚠️ AI Partnership Required
+<span class="screen-reader-only">Warning</span>⚠️ AI Partnership Required
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -133,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🎯 The Key Insight: Encoding Matters for Interpretability
+<span class="screen-reader-only">Important</span>🎯 The Key Insight: Encoding Matters for Interpretability
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -158,36 +124,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python" class="level3">
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <div id="load-and-model-python" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor, plot_tree</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sales_data <span class="op">=</span> pd.read_csv(<span class="st">"salesPriceData.csv"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare model data (treating zipCode as numerical)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>model_vars <span class="op">=</span> [<span class="st">'SalePrice'</span>, <span class="st">'LotArea'</span>, <span class="st">'YearBuilt'</span>, <span class="st">'GrLivArea'</span>, <span class="st">'FullBath'</span>, </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>              <span class="st">'HalfBath'</span>, <span class="st">'BedroomAbvGr'</span>, <span class="st">'TotRmsAbvGrd'</span>, <span class="st">'GarageCars'</span>, <span class="st">'zipCode'</span>]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>model_data <span class="op">=</span> sales_data[model_vars].dropna()</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> model_data.drop(<span class="st">'SalePrice'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> model_data[<span class="st">'SalePrice'</span>]</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">123</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Build decision tree</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>tree_model <span class="op">=</span> DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">3</span>, </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                                  min_samples_split<span class="op">=</span><span class="dv">20</span>, </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                                  min_samples_leaf<span class="op">=</span><span class="dv">10</span>, </span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                                  random_state<span class="op">=</span><span class="dv">123</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>tree_model.fit(X_train, y_train)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model built with </span><span class="sc">{</span>tree_model<span class="sc">.</span>get_n_leaves()<span class="sc">}</span><span class="ss"> terminal nodes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model built with 8 terminal nodes</code></pre>
 </div>
@@ -199,17 +135,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-1" class="level3">
 <h3 class="anchored" data-anchor-id="python-1">Python</h3>
 <div id="cell-visualize-tree-python" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize tree</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plot_tree(tree_model, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>          feature_names<span class="op">=</span>X_train.columns,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          filled<span class="op">=</span><span class="va">True</span>, </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          rounded<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>          max_depth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Decision Tree (zipCode as Numerical)"</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -244,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-⚠️ The Problem Revealed
+<span class="screen-reader-only">Warning</span>⚠️ The Problem Revealed
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -274,17 +199,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-4" class="level3">
 <h3 class="anchored" data-anchor-id="python-4">Python</h3>
 <div id="cell-visualize-tree-cat-python" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize tree with one-hot encoded zipCode</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plot_tree(tree_model_cat, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>          feature_names<span class="op">=</span>X_train_cat.columns,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>          filled<span class="op">=</span><span class="va">True</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>          rounded<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>          max_depth<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Decision Tree (zipCode One-Hot Encoded)"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -339,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📁 Quick Start with Starter Repository
+<span class="screen-reader-only">Important</span>📁 Quick Start with Starter Repository
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -354,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💡 Why Use the Starter Repository?
+<span class="screen-reader-only">Tip</span>💡 Why Use the Starter Repository?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -375,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🎯 Navy SEALs Motto
+<span class="screen-reader-only">Note</span>🎯 Navy SEALs Motto
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -391,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💾 Important: Save Your Work Frequently!
+<span class="screen-reader-only">Warning</span>💾 Important: Save Your Work Frequently!
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -423,6 +337,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Are There Any Suggestions for Implementing Decision Trees in Python With Prioper Categorical Handling?</strong> Please poke around the Internet (AI is not as helpful with new libraries) for suggestions on how to implement decision trees in Python with better (i.e.&nbsp;not one-hot encoding) categorical handling. Please provide a link to the source and a quote from the source. There is not right answer here, but please provide a thoughtful answer, I am curious to see what you find.</p></li>
 </ol>
 </section>
+<section id="discussion-questions---answers" class="level2">
+<h2 class="anchored" data-anchor-id="discussion-questions---answers">Discussion Questions - Answers</h2>
+<section id="numerical-vs-categorical-encoding-how-should-zip-code-be-modelled" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-vs-categorical-encoding-how-should-zip-code-be-modelled">1. Numerical vs Categorical Encoding: How Should Zip Code Be Modelled?</h3>
+<p><strong>Zip codes must be modelled as categorical variables, specifically as non-ordinal categorical variables.</strong></p>
+<p>From a real estate perspective, zip codes represent discrete geographic neighborhoods or regions. A zip code like 50015 doesn’t have a meaningful numerical relationship to 50016—they’re simply different locations. When we treat zip codes numerically, the decision tree algorithm makes splits like “zipCode &lt; 50012.5”, which has no practical interpretation for house prices. There’s no inherent reason why houses in zip code 50013 should cost more or less than houses in zip code 50012 simply because one number is larger than another.</p>
+<p>Our analysis confirms this problem: when zipCode was treated as numerical, it received 0.0% importance—essentially appearing irrelevant to price prediction. This happened because the numerical ordering of zip codes (50010, 50011, 50012, etc.) has no correlation with house prices. The algorithm correctly recognized that numerical splits on zip codes don’t help predict prices.</p>
+<p>Zip codes are <strong>non-ordinal</strong> categorical variables because: - They have no natural ordering (unlike rating scales where 5 stars &gt; 4 stars) - The numerical value has no magnitude meaning (zip code 99999 isn’t “better” than 10001) - Each zip code represents a distinct category with potentially different price characteristics</p>
+<p>Therefore, zip codes should be one-hot encoded (or handled through other categorical encoding methods) to allow the decision tree to properly distinguish between different neighborhoods.</p>
+</section>
+<section id="r-vs-python-implementation-differences-why-do-they-differ" class="level3">
+<h3 class="anchored" data-anchor-id="r-vs-python-implementation-differences-why-do-they-differ">2. R vs Python Implementation Differences: Why Do They Differ?</h3>
+<p><strong>R’s <code>rpart</code> package provides superior categorical variable handling compared to Python’s <code>sklearn.tree.DecisionTreeRegressor</code>.</strong></p>
+<p>The fundamental difference lies in how each implementation handles variable types:</p>
+<p><strong>R’s <code>rpart</code> advantage:</strong> - <strong>Native categorical support</strong>: R’s <code>rpart</code> package recognizes categorical (factor) variables natively and can make multi-way splits on categorical variables, allowing it to compare all categories simultaneously - <strong>Efficient splitting</strong>: Instead of creating binary splits like “zipCode == 50015” vs “everything else”, R can split into groups of categories (e.g., “zipCode in {50015, 50016, 50020}” vs “other zip codes”) - <strong>No dummy variable explosion</strong>: R doesn’t require one-hot encoding, which avoids creating many binary features and spreading importance across multiple dummy variables</p>
+<p><strong>Python’s <code>sklearn.tree.DecisionTreeRegressor</code> limitation:</strong> According to the official scikit-learn documentation at https://scikit-learn.org/stable/modules/tree.html, there is a critical weakness:</p>
+<blockquote class="blockquote">
+<p>“scikit-learn uses an optimized version of the CART algorithm; however, scikit-learn implementation does not support categorical variables for now.”</p>
+</blockquote>
+<p>This documentation statement explicitly acknowledges that scikit-learn’s DecisionTreeRegressor does not support categorical variables natively. All features must be treated as numerical/continuous, which is why we must use one-hot encoding as a workaround.</p>
+<p>The documentation further states:</p>
+<blockquote class="blockquote">
+<p>“The decision tree algorithm in scikit-learn only supports numerical features. If you have categorical features, you need to encode them first using techniques like one-hot encoding or label encoding.”</p>
+</blockquote>
+<p>When we one-hot encode zip codes in Python, each zip code becomes a separate binary feature. This causes several problems: 1. <strong>Importance dilution</strong>: The importance of zip codes gets spread across 25+ binary features, making it hard to see the overall contribution 2. <strong>Binary splits only</strong>: Each split can only separate one zip code from all others, not create meaningful groups 3. <strong>Tree complexity</strong>: The tree becomes harder to interpret with many similar-looking features</p>
+<p><strong>Which is better?</strong> R’s <code>rpart</code> clearly handles categorical variables better because it was designed with native categorical support. For real-world applications with many categorical variables (like zip codes, neighborhoods, or property types), R’s approach provides more interpretable and efficient models. Python’s limitation requires workarounds that compromise both model interpretability and computational efficiency.</p>
+</section>
+<section id="suggestions-for-better-categorical-handling-in-python-decision-trees" class="level3">
+<h3 class="anchored" data-anchor-id="suggestions-for-better-categorical-handling-in-python-decision-trees">3. Suggestions for Better Categorical Handling in Python Decision Trees</h3>
+<p>While scikit-learn’s traditional DecisionTreeRegressor has categorical limitations, the Python ecosystem has evolved to address this gap:</p>
+<p><strong>Option 1: Histogram-Based Gradient Boosting (scikit-learn 0.22+)</strong></p>
+<p>Scikit-learn now offers <code>HistGradientBoostingRegressor</code>, which natively supports categorical variables. According to the scikit-learn documentation (https://scikit-learn.org/stable/modules/ensemble.html#categorical-support), this newer implementation provides:</p>
+<blockquote class="blockquote">
+<p>“Native categorical support: the model can treat categorical features directly, without requiring one-hot encoding. This often results in better models with reduced preprocessing.”</p>
+</blockquote>
+<p>This represents a significant advancement because it avoids the one-hot encoding problem entirely while maintaining the scikit-learn API.</p>
+<p><strong>Option 2: LightGBM</strong></p>
+<p>LightGBM (Microsoft’s gradient boosting framework) provides excellent categorical variable support. According to the LightGBM documentation (https://lightgbm.readthedocs.io/en/latest/Advanced-Topics.html#categorical-feature-support):</p>
+<blockquote class="blockquote">
+<p>“LightGBM can use categorical features directly (without one-hot encoding). The experiment on Expo data shows about 8x speed-up compared with one-hot encoding.”</p>
+</blockquote>
+<p>LightGBM uses an optimal split finding algorithm specifically for categorical variables, making it faster and often more accurate than one-hot encoding approaches.</p>
+<p><strong>Option 3: CatBoost</strong></p>
+<p>CatBoost (Yandex’s gradient boosting library) was specifically designed with categorical variables in mind. The CatBoost documentation emphasizes:</p>
+<blockquote class="blockquote">
+<p>“CatBoost can work with categorical features without any preprocessing, using a novel method of processing categorical features that avoids the typical overfitting.”</p>
+</blockquote>
+<p><strong>Recommendation:</strong></p>
+<p>For decision tree-based models in Python, I recommend using either: 1. <strong>HistGradientBoostingRegressor</strong> from scikit-learn for native categorical support while staying within the scikit-learn ecosystem 2. <strong>LightGBM</strong> for production applications requiring maximum performance and interpretability with categorical variables</p>
+<p>These modern implementations represent the current state-of-the-art for handling categorical variables in Python tree-based models, moving beyond the limitations of the traditional DecisionTreeRegressor that requires one-hot encoding.</p>
+</section>
+</section>
 <section id="grading-rubric" class="level2">
 <h2 class="anchored" data-anchor-id="grading-rubric">Grading Rubric 🎓</h2>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -431,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📊 What You’re Really Being Graded On
+<span class="screen-reader-only">Important</span>📊 What You’re Really Being Graded On
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -561,13 +527,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
