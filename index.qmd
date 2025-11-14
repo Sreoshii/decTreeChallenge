@@ -363,13 +363,13 @@ Zip codes are **non-ordinal** categorical variables because:
 - The numerical value has no magnitude meaning (zip code 99999 isn't "better" than 10001)
 - Each zip code represents a distinct category with potentially different price characteristics
 
-Therefore, zip codes should be one-hot encoded (or handled through other categorical encoding methods) to allow the decision tree to properly distinguish between different neighborhoods.
+**How should zip codes be encoded?** Zip codes should be treated as categorical variables, but **NOT always with one-hot encoding**. While one-hot encoding can work for small numbers of zip codes (like our analysis with 25 categories), it becomes problematic when dealing with hundreds of categories because it creates many sparse binary columns, leading to inefficient training, overfitting risk, and poor representation of geographic relationships. For datasets with many zip codes, better alternatives include target encoding, native categorical handling in modern libraries (CatBoost, LightGBM, HistGradientBoostingRegressor), or region-based encoding that groups zip codes into larger geographic areas.
 
 ### 2. R vs Python Implementation Differences: Why Do They Differ?
 
-**R's `rpart` package provides superior categorical variable handling compared to Python's `sklearn.tree.DecisionTreeRegressor`.**
+**This comparison focuses on R's `rpart` versus Python's `sklearn.tree.DecisionTreeRegressor`**—two traditional decision tree implementations. While `rpart` provides superior categorical variable handling compared to sklearn's `DecisionTreeRegressor`, it's important to note that modern Python libraries have since developed native categorical support that equals or exceeds `rpart`.
 
-The fundamental difference lies in how each implementation handles variable types:
+The fundamental difference between `rpart` and sklearn's `DecisionTreeRegressor` lies in how each implementation handles variable types:
 
 **R's `rpart` advantage:**
 - **Native categorical support**: R's `rpart` package recognizes categorical (factor) variables natively and can make multi-way splits on categorical variables, allowing it to compare all categories simultaneously
@@ -392,7 +392,19 @@ When we one-hot encode zip codes in Python, each zip code becomes a separate bin
 2. **Binary splits only**: Each split can only separate one zip code from all others, not create meaningful groups
 3. **Tree complexity**: The tree becomes harder to interpret with many similar-looking features
 
-**Which is better?** R's `rpart` clearly handles categorical variables better because it was designed with native categorical support. For real-world applications with many categorical variables (like zip codes, neighborhoods, or property types), R's approach provides more interpretable and efficient models. Python's limitation requires workarounds that compromise both model interpretability and computational efficiency.
+**Which is better?** The answer depends on which implementations we're comparing:
+
+- **R's `rpart` vs sklearn's `DecisionTreeRegressor`**: R's `rpart` clearly handles categorical variables better because it was designed with native categorical support, while sklearn's traditional `DecisionTreeRegressor` requires one-hot encoding workarounds.
+
+- **R's `rpart` vs modern Python libraries**: Modern Python libraries such as CatBoost, LightGBM, XGBoost (with `enable_categorical=True`), and scikit-learn's `HistGradientBoostingRegressor` now provide native categorical handling that equals or exceeds `rpart`'s capabilities. These libraries avoid the one-hot encoding problem entirely and can handle categorical variables as efficiently as `rpart`.
+
+**Conclusion**: While `rpart` has an advantage over sklearn's traditional `DecisionTreeRegressor` for categorical variables, this advantage does not extend to modern Python tree-based libraries, which now offer native categorical support on par with or superior to `rpart`. For practitioners choosing between R and Python for categorical-heavy modeling, the choice is less about categorical support and more about ecosystem preferences, since both languages now have strong categorical handling capabilities.
+
+**Practical Recommendation**: For new projects involving categorical variables:
+- If using **Python**, prefer modern libraries with native categorical support (CatBoost, LightGBM, XGBoost, or HistGradientBoostingRegressor) over sklearn's traditional DecisionTreeRegressor
+- If using **R**, `rpart` remains an excellent choice with robust categorical handling
+- If already using **sklearn**, consider upgrading to `HistGradientBoostingRegressor` for native categorical support within the same ecosystem
+- The key takeaway: Always use implementations with native categorical support rather than relying on one-hot encoding workarounds, regardless of which language you choose
 
 ### 3. Suggestions for Better Categorical Handling in Python Decision Trees
 
